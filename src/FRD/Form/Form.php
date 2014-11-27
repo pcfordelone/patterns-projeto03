@@ -2,17 +2,49 @@
 
 namespace FRD\Form;
 
-use FRD\Form\Elements\ElementAbstract;
+use FRD\Form\Fields\Interfaces\FieldInterface;
 use FRD\Form\Interfaces\FormInterface;
 
 class Form implements FormInterface
 {
-    private $formTittle;
-    private $tag;
+    private $form;
     private $attributes;
-    private $element;
+    private $fields;
+    private $validator;
 
-    public function __construct(array $attributes)
+
+    public function __construct(Validator $validator, $attributes)
+    {
+        $this->validator = $validator;
+        $this->attributes = $attributes;
+    }
+
+    public function createField(FieldInterface $field)
+    {
+        $this->fields[] = $field;
+    }
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+    public function render()
+    {
+        $this->form = "<form ";
+        $this->form .= $this->attributes . " />";
+
+        if (isset($this->fields)) {
+            foreach ($this->fields as $field) {
+                $this->form .= $field->getField();
+            }
+        }
+
+        $this->form .= "</form>\n";
+
+        echo $this->form;
+    }
+
+    /*public function __construct(array $attributes)
     {
         $this->attributes = $attributes;
     }
@@ -26,13 +58,13 @@ class Form implements FormInterface
         }
 
         $this->tag.=" >\n";
-        $this->tag.="\t\t<h2>".$this->formTittle."</h2>\n";
+        $this->tag.="<h2>".$this->formTittle."</h2>\n";
         return $this->tag;
     }
 
     public function formEnd()
     {
-        $this->tag.= "\t</form>\n";
+        $this->tag.= "</form>\n";
         return $this->tag;
     }
 
@@ -51,5 +83,6 @@ class Form implements FormInterface
     public function setFormTittle($tittle)
     {
         $this->formTittle = $tittle;
-    }
+    }*/
+
 } 

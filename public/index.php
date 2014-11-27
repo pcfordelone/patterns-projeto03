@@ -2,52 +2,18 @@
 
 require_once "../autoload.php";
 
-$formAttributes = array("action" => "","method" => "post","id" => "myForm");
+$request = new \FRD\Form\Request();
+$validator = new \FRD\Form\Validator($request);
 
-$form = new \FRD\Form\Form($formAttributes);
-$form->setFormTittle("Formulário Code.Education");
-$form->formStart();
+$form01 = new \FRD\Form\Form($validator, "method='POST' action='#' id='myForm'");
+$nome = new \FRD\Form\Fields\Types\Input("id='label'", "Nome:", "class='form-control' id='nome' type='name'");
+$email = new \FRD\Form\Fields\Types\Input("id='label'", "E-mail:", "class='form-control' id='email' type='email'");
+$submit = new \FRD\Form\Fields\Types\Input("", "", "class='btn btn-default' id='submit' type='submit' value='Enviar'");
 
-##### Elementos
-$nome = new \FRD\Form\Elements\Types\Input(
-    array("for" => "nome"),
-    "Nome:",
-    array("type" => "name", "class" => "form-control", "id" => "nome", "name" => "nome"));
-$nome->setLabel();
-$nome->setElement();
-$nome->getTag();
+$form01->createField($nome);
+$form01->createField($email);
+$form01->createField($submit);
 
-$email = new \FRD\Form\Elements\Types\Input(
-    array("for" => "email"),
-    "Email:",
-    array("type" => "email", "class" => "form-control", "id" => "email", "name" => "email"));
-$email->setLabel();
-$email->setElement();
-$email->getTag();
-
-$mensagem = new \FRD\Form\Elements\Types\TextArea(
-    array("for" => "mensagem"),
-    "Mensagem:",
-    array("type" => "text", "class" => "form-control", "id" => "mensagem", "name" => "mensagem"));
-$mensagem->setLabel();
-$mensagem->setElement();
-$mensagem->getTag();
-
-$submit = new \FRD\Form\Elements\Types\Input(
-    array("for" => "submit"),
-    "",
-    array("type" => "submit", "class" => "btn btn-default", "id" => "submit", "name" => "submit", "value"=>"Enviar"));
-
-$submit->setElement();
-$submit->getTag();
-########
-
-$form->addElement($nome);
-$form->addElement($email);
-$form->addElement($mensagem);
-$form->addElement($submit);
-
-$form->formEnd();
 
 ?>
 
@@ -77,7 +43,7 @@ $form->formEnd();
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <?php $form->render(); ?>
+            <?php $form01->render(); ?>
         </div>
     </div>
 </div>

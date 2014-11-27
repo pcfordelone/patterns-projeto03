@@ -2,14 +2,12 @@
 
 namespace FRD\Form\Interfaces;
 
-use FRD\Form\Elements\ElementAbstract;
+
+use FRD\Form\Validator;
 
 interface FormInterface
 {
-    public function __construct(array $attributes);
-    public function formStart();
-    public function formEnd();
-    public function addElement(ElementAbstract $element);
+    public function __construct(Validator $validator, $attributes);
     public function render();
-    public function setFormTittle($tittle);
+
 } 
