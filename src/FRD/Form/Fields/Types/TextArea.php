@@ -5,7 +5,7 @@ namespace FRD\Form\Fields\Types;
 
 use FRD\Form\Fields\Interfaces\FieldInterface;
 
-class Input implements FieldInterface
+class TextArea implements FieldInterface
 {
     private $labelText;
     private $labelAttrib;
@@ -23,11 +23,12 @@ class Input implements FieldInterface
     {
         if (!is_null($this->labelText)) {
             $this->field  = "<label " . $this->labelAttrib." >";
-            $this->field .= $this->labelText . "</label>\n";
+            $this->field .= $this->labelText . "</label>";
         }
 
-        $this->field .= "<input " . $this->fieldAttrib . " />\n";
+        $this->field .= "<textArea " . $this->fieldAttrib . " ></textArea>\n";
 
         return $this->field;
     }
+
 } 

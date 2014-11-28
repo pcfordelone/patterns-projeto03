@@ -12,13 +12,14 @@ class Form implements FormInterface
     private $fields;
     private $validator;
 
-
+    ## Recebe a Classe Validator e os atributos do formulário ##
     public function __construct(Validator $validator, $attributes)
     {
         $this->validator = $validator;
         $this->attributes = $attributes;
     }
 
+    ## Cria Novo Campo no Formulário ##
     public function createField(FieldInterface $field)
     {
         $this->fields[] = $field;
@@ -28,6 +29,7 @@ class Form implements FormInterface
         return $this->fields;
     }
 
+    ## Renderiza Formulário em HTML ##
     public function render()
     {
         $this->form = "<form ";
@@ -43,46 +45,4 @@ class Form implements FormInterface
 
         echo $this->form;
     }
-
-    /*public function __construct(array $attributes)
-    {
-        $this->attributes = $attributes;
-    }
-
-    public function formStart()
-    {
-        $this->tag =  "<form";
-
-        foreach ($this->attributes as $key => $value ) {
-            $this->tag.= " {$key}=\"{$value}\"";
-        }
-
-        $this->tag.=" >\n";
-        $this->tag.="<h2>".$this->formTittle."</h2>\n";
-        return $this->tag;
-    }
-
-    public function formEnd()
-    {
-        $this->tag.= "</form>\n";
-        return $this->tag;
-    }
-
-    public function addElement(ElementAbstract $element)
-    {
-        $this->element = $element;
-        $this->tag .= $this->element->getTag();
-        return $this->tag;
-    }
-
-    public function render()
-    {
-        echo $this->tag;
-    }
-
-    public function setFormTittle($tittle)
-    {
-        $this->formTittle = $tittle;
-    }*/
-
 } 
