@@ -3,6 +3,7 @@
 namespace FRD\Form;
 
 
-class Request {
+class Request
+{
 
 } 

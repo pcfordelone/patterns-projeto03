@@ -2,42 +2,33 @@
 
 namespace FRD\Form;
 
-use FRD\Form\Fields\Interfaces\FieldInterface;
-use FRD\Form\Interfaces\FormInterface;
+use FRD\Form\Field\AbstractField;
+use FRD\Form\Task\TaskInterface;
+use JsonSchema\Constraints\String;
 
-class Form implements FormInterface
+class Form
 {
-    private $form;
-    private $attributes;
-    private $fields;
     private $validator;
+    public $fields = [];
+    private $form;
 
-    ## Recebe a Classe Validator e os atributos do formulário ##
-    public function __construct(Validator $validator, $attributes)
+    function __construct(Validator $validator)
     {
         $this->validator = $validator;
-        $this->attributes = $attributes;
     }
 
-    ## Cria Novo Campo no Formulário ##
-    public function createField(FieldInterface $field)
+    function createField(TaskInterface $field)
     {
         $this->fields[] = $field;
     }
-    public function getFields()
-    {
-        return $this->fields;
-    }
 
-    ## Renderiza Formulário em HTML ##
-    public function render()
+    function render()
     {
-        $this->form = "<form ";
-        $this->form .= $this->attributes . " />";
+        $this->form  = "\n<form>\n";
 
-        if (isset($this->fields)) {
+        if (!is_null($this->fields)) {
             foreach ($this->fields as $field) {
-                $this->form .= $field->getField();
+                $this->form .= $field->run();
             }
         }
 

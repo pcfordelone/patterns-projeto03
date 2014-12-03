@@ -3,10 +3,12 @@
 namespace FRD\Form;
 
 
-class Validator {
+class Validator
+{
+    private $request;
 
-    public function __construct(Request $request)
+    function __construct(Request $request)
     {
-
+        $this->request = $request;
     }
 } 
