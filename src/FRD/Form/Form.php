@@ -3,6 +3,7 @@
 namespace FRD\Form;
 
 use FRD\Form\Field\AbstractField;
+use FRD\Form\Field\Factory\AbstractFieldFactory;
 use FRD\Form\Task\TaskInterface;
 use JsonSchema\Constraints\String;
 
@@ -17,9 +18,10 @@ class Form
         $this->validator = $validator;
     }
 
-    function createField(TaskInterface $field)
+    function addField(AbstractFieldFactory $field)
     {
         $this->fields[] = $field;
+
     }
 
     function render()
@@ -28,7 +30,7 @@ class Form
 
         if (!is_null($this->fields)) {
             foreach ($this->fields as $field) {
-                $this->form .= $field->run();
+                $this->form .= $field->getField();
             }
         }
 
