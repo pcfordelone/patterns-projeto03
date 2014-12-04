@@ -6,28 +6,32 @@ use FRD\Form\Field\Interfaces\FieldInterface;
 
 class LabelType implements FieldInterface
 {
-    private $tag;
+    private $field;
     private $attrib;
-    private $labelText;
+    private $text;
 
-    public function __construct($attrib)
+    public function setAttrib($attrib)
     {
         $this->attrib = $attrib;
     }
 
-    public function setLabelText($labelText)
+    public function setText($text)
     {
-        $this->labelText = $labelText;
+        $this->text = $text;
     }
 
-    function getTag()
+    function getField()
     {
-        $this->tag = "<label ";
-        $this->tag .= $this->attrib;
-        $this->tag .= " >\n";
-        $this->tag .= $this->labelText;
-        $this->tag .= "</label>";
+        $this->field = "<label ";
+        if (!is_null($this->attrib)) {
+            $this->field .= $this->attrib;
+        }
+        $this->field .= " >";
+        if (!is_null($this->text)) {
+            $this->field .= $this->text;
+        }
+        $this->field .= "</label>\n";
 
-        return $this->tag;
+        return $this->field;
     }
 } 

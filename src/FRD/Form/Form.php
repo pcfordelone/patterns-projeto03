@@ -2,26 +2,19 @@
 
 namespace FRD\Form;
 
-use FRD\Form\Field\AbstractField;
-use FRD\Form\Field\Factory\AbstractFieldFactory;
-use FRD\Form\Task\TaskInterface;
-use JsonSchema\Constraints\String;
+
+use FRD\Form\Traits\FieldContainerTrait;
 
 class Form
 {
+    use FieldContainerTrait;
+
     private $validator;
-    public $fields = [];
     private $form;
 
     function __construct(Validator $validator)
     {
         $this->validator = $validator;
-    }
-
-    function addField(AbstractFieldFactory $field)
-    {
-        $this->fields[] = $field;
-
     }
 
     function render()

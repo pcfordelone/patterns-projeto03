@@ -6,31 +6,29 @@ use FRD\Form\Field\Interfaces\FieldInterface;
 
 class SelectType implements FieldInterface
 {
-    private $tag;
+    private $field;
     private $attrib;
     public $options = [];
 
-    public function __construct($attrib)
+    function setAttrib($attrib)
     {
         $this->attrib = $attrib;
     }
-
-    public function setOptions(array $options)
+    function setOptions(array $options)
     {
         $this->options = $options;
     }
 
-    function getTag()
+    function getField()
     {
-        $this->tag  = "<select ";
-        $this->tag .= $this->attrib;
-        $this->tag .= " >\n";
+        $this->field  = "<select ";
+        $this->field .= $this->attrib;
+        $this->field .= " >\n";
         foreach ($this->options as $option) {
-            $this->tag .= "<option>" . $option . "</option>";
+            $this->field .= "<option>" . $option . "</option>";
         }
-        $this->tag .= "</select>";
+        $this->field .= "</select>";
 
-
-        return $this->tag;
+        return $this->field;
     }
 } 

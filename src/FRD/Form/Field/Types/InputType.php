@@ -6,19 +6,21 @@ use FRD\Form\Field\Interfaces\FieldInterface;
 
 class InputType implements FieldInterface
 {
-    private $tag;
+    private $field;
     private $attrib;
 
-    public function __construct($attrib)
+    public function setAttrib($attrib)
     {
         $this->attrib = $attrib;
     }
-    public function getTag()
-    {
-        $this->tag  = "<input ";
-        $this->tag .= $this->attrib;
-        $this->tag .= " />\n";
 
-        return $this->tag;
+    function getField()
+    {
+        $this->field = "<input ";
+        if (!is_null($this->attrib)) {
+            $this->field .= $this->attrib;
+        }
+        $this->field .= " />\n";
+        return $this->field;
     }
 } 

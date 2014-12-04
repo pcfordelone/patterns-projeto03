@@ -6,20 +6,21 @@ use FRD\Form\Field\Interfaces\FieldInterface;
 
 class TextAreaType implements FieldInterface
 {
-    private $tag;
+    private $field;
     private $attrib;
 
-    public function __construct($attrib)
+    public function setAttrib($attrib)
     {
         $this->attrib = $attrib;
     }
 
-    function getTag()
+    function getField()
     {
-        $this->tag  = "<textarea ";
-        $this->tag .= $this->attrib;
-        $this->tag .= " ></textarea>\n";
-
-        return $this->tag;
+        $this->field = "<textarea ";
+        if (!is_null($this->attrib)) {
+            $this->field .= $this->attrib;
+        }
+        $this->field .= " ></textarea>\n";
+        return $this->field;
     }
 } 

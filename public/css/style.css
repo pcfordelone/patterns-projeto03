@@ -9,6 +9,9 @@ form label {
 form input[type="submit"] {
     margin-top: 25px;
 }
+form fieldset {
+    margin-top: 25px;
+}
 
 .form-control-inline {
     min-width: 0;
